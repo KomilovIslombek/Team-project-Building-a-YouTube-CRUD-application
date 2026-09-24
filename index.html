@@ -133,16 +133,16 @@
                         </g>
                     </svg>
                 </button>
-                <a id="list" href="./register.html">
+                <a id="list" class="avatar-img-wrapper" href="./register.html">
                     <img class="avatar-img" src="./img/avatar.jpg" alt="avatar-img" width="32px" height="32px">
                 </a>
             </section>
         </header>
         <main class="main">
             <div class="left-menu-wrapper">
-                <ul class="navbar-list">
+                <ul class="navbar-list" id="users-list">
                     <h1>YouTube Members</h1>
-                    <li id="homeButton" class="channel active" data_id="main">
+                    <li id="homeButton" class="channel active" data-id="main">
                         <a href="#">
                             <svg viewbox="0 0 24 24" focusable="false"
                                 style="pointer-events: none; display: block; width: 30px; height: 30px;">
@@ -154,13 +154,13 @@
                         </a>
                     </li>
                     <!-- fake user -->
-                    <li class="channel" data-id="1">
+                    <!-- <li class="channel" data-id="1">
                         <a href="#">
                             <img src="https://cdn-icons-png.flaticon.com/512/146/146031.png" alt="channel-icon"
                                 width="30px" height="30px">
                             <span>Hikmat</span>
                         </a>
-                    </li>
+                    </li> -->
 
                 </ul>
             </div>
@@ -187,6 +187,10 @@
             </div>
         </main>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.20.0/axios.min.js" integrity="sha512-OVq+Gfa9PIjbTC0jWOccSFSp/vzkBQ5pMcbHQrNZLl+izmdFmusmAMlX4LT550ivvSnMXMEeG7CxEtjIz6Dn2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script type="module" src="./js/main.js"></script>
 </body>
 
 </html>

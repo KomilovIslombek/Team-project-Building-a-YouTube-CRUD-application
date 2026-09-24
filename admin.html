@@ -12,6 +12,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/material-design-iconic-font.css">
     <link rel="stylesheet" href="./css/material-design-iconic-font.min.css">
+
+    <style>
+        .videos-list-wrapper{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 10px 20px; 
+            align-items: flex-start;
+        }
+        
+        #errorMessage {
+            margin-bottom: 15px; 
+            height: 19px; 
+        }
+
+        #errorMessage.loading {
+            color: rgb(0, 126, 128) !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -58,30 +77,47 @@
             <button id="logoutBtn">Log out</button>
         </header>
         <main class="main">
+
             <div class="wrapper">
                 <h1 class="title">Upload a video</h1>
+                
+                <span id="errorMessage" style="color: red"></span>
                 <form id="videoForm" action="#" class="site-form">
                     <label>
-                        <input type="text" id="videoInput" placeholder="video title" required>
+                        <input type="text" id="videoInput" name="video_title" placeholder="video title" required>
                     </label>
                     <label class="custom-upload">
                         <span class="zmdi zmdi-upload"></span>
                         <span class="file-name">click upload a video</span>
-                        <input type="file" id="uploadInput" accept="video/*">
+                        <input type="file" id="uploadInput" name="video_file" accept="video/*">
                     </label>
                     <input type="submit" value="Upload" id="submitButton">
                 </form>
-                <img src="img/signin-image.jpg" class="signup-image">
+                <img style="display:none;" src="img/signin-image.jpg" class="signup-image">
             </div>
-            <div class="admin-wrapper">
-                <ul id="videosList" class="videos-list video-item">
-                    <video controls="true" src=""></video>
-                    <p class="content" contenteditable="true"></p>
-                    <img class="delete-icon" src="./img/delete.png" width="25">
+            
+            <div class="admin-wrapper videos-list-wrapper">
+                <ul class="videos-list">
                 </ul>
             </div>
         </main>
     </div>
+
+    <dialog id="editVideoModal">
+        <form id="editVideoForm" method="dialog">
+            <h2>Edit video title</h2>
+            <label for="editVideoTitle">Title</label>
+            <input id="editVideoTitle" type="text" required maxlength="120">
+            <div class="modal-actions">
+                <button id="cancelEdit" type="button">Cancel</button>
+                <button type="submit">Save changes</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.20.0/axios.min.js" integrity="sha512-OVq+Gfa9PIjbTC0jWOccSFSp/vzkBQ5pMcbHQrNZLl+izmdFmusmAMlX4LT550ivvSnMXMEeG7CxEtjIz6Dn2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="module" src="./js/controllers/admin.controller.js"></script>
 </body>
 
 </html>

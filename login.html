@@ -20,11 +20,11 @@
                 <span id="errorMessage" style="margin-bottom: 15px; height: 19px; color: red">Bu fake error xabar</span>
                 <label>
                     <span class="zmdi zmdi-account"></span>
-                    <input type="text" id="usernameInput" placeholder="Your name">
+                    <input type="text" id="usernameInput" value="johndoe" name="username" placeholder="Your name">
                 </label> 
                 <label>
                     <span class="zmdi zmdi-lock"></span>
-                    <input type="password" id="passwordInput" placeholder="Password">
+                    <input type="password" id="passwordInput" value="password123" name="password" placeholder="Password">
                     <button class="zmdi zmdi-eye" id="showButton" type="button"></button>
                 </label>
                     <input type="submit" value="Log in" id="submitButton">
@@ -36,5 +36,10 @@
             <img src="img/signin-image.jpg" alt="signin-image" class="signin-image">
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.20.0/axios.min.js" integrity="sha512-OVq+Gfa9PIjbTC0jWOccSFSp/vzkBQ5pMcbHQrNZLl+izmdFmusmAMlX4LT550ivvSnMXMEeG7CxEtjIz6Dn2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="module" src="./js/controllers/login.controller.js"></script>
+
 </body>
 </html>

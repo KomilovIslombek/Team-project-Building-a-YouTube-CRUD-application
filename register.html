@@ -16,20 +16,20 @@
         <div class="wrapper">
             <h1 class="title">Registration Page</h1>
             <form id="registerForm" action="#" class="site-form">
-                <!-- <span id="errorMessage" style="margin-bottom: 15px; height: 19px; color: red;">bu fake error xabar</span> -->
+                <span id="errorMessage" style="margin-bottom: 15px; height: 19px; color: red;">bu fake error xabar</span>
                 <label>
                     <span class="zmdi zmdi-account"></span>
-                    <input type="text" id="usernameInput" placeholder="Your name" required>
+                    <input type="text" id="usernameInput" name="username" value="test1" placeholder="Your name" required>
                 </label>
                 <label>
                     <span class="zmdi zmdi-lock"></span>
-                    <input type="password" id="passwordInput" placeholder="Password" required>
+                    <input type="password" id="passwordInput" name="password" value="12345678" placeholder="Password" required>
                     <button class="zmdi zmdi-eye" type="button" id="showButton"></button>
                 </label>
                 <label class="custom-upload">
                     <span class="zmdi zmdi-upload"></span>
                     <span class="file-name">click upload a avatar picture</span>
-                    <input type="file" id="uploadInput" accept="image/*">
+                    <input type="file" id="uploadInput" name="avatar" accept="image/*">
                 </label>
                 <input type="submit" value="Register" id="submitButton">
             </form>
@@ -40,5 +40,9 @@
             <img src="img/signup-image.jpg" alt="signup-image" class="signup-image">
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.20.0/axios.min.js" integrity="sha512-OVq+Gfa9PIjbTC0jWOccSFSp/vzkBQ5pMcbHQrNZLl+izmdFmusmAMlX4LT550ivvSnMXMEeG7CxEtjIz6Dn2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="module" src="./js/controllers/register.controller.js"></script>
 </body>
 </html>

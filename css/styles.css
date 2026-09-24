@@ -237,12 +237,14 @@ main.main {
     padding: 0 0 0 24px;
     height: 50px;
     position: relative;
+    cursor: pointer;
 }
 .navbar-list li:hover {
     background-color: var(--nav-li-hover-bg-color);
 }
 .navbar-list li.active {
     background-color: var(--top-nav-slider-hover-color);
+    border-right: 3px solid var(--nav-li-active-icon-bg-color);
 }
 .navbar-list li.active a svg {
     fill: var(--nav-li-active-icon-bg-color);
@@ -293,16 +295,11 @@ main.main {
 .iframes-list {
     display: flex;
     flex-wrap: wrap;  
+    gap: 32px 24px;
 }
 .iframe {
-    width: 26%;
+    width: calc((100% - 48px) / 3);
     position: relative;
-}
-.iframe:not(:nth-child(3n)) {
-    margin-right: 2%;
-}
-.iframe:not(:nth-child(-n + 3)) {
-    margin-top: 36px;
 }
 .iframe {
     display: block;
@@ -311,8 +308,11 @@ main.main {
 }
 .iframe > video {
     width: 100%;
-    height: 300px;
+    aspect-ratio: 16 / 9;
+    height: auto;
     display: block;
+    border-radius: 10px;
+    background-color: #111;
 }
 .iframe > iframe {
     display: none;
@@ -333,37 +333,54 @@ main.main {
 }
 .iframe-footer-text {
     width: 100%;
+    min-width: 0;
 }
 .channel-name {
-    color: var(--spec-text-primary);
-    font-size: 22px;
-    color: rgb(0, 0, 0);
+    margin: 3px 0 0;
+    color: #606060;
+    font-size: 14px;
+    font-weight: 400;
 }
 .iframe-title {
+    margin: 0;
     font-size: 16px;
     line-height: 1.25rem;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.74)
 }
 .uploaded-time {
-    text-align: right;
     display: block;
-    width: 100%;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.699);
-    font-weight: 500;
-    margin-right: 10px;
+    margin-top: 4px;
+    color: #606060;
+    font-size: 12px;
 }
 .download { 
-    display:  flex;
-    align-items:flex-end;
-    position: absolute;
-    top: 0;
-    right: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
     font-size: 12px;
+    color: #606060;
 }
 .download img {
     display: block;
-    width: 30px;
-    margin-left: 3px;
+    width: 20px;
+}
+
+@media (max-width: 1100px) {
+    .iframe {
+        width: calc((100% - 24px) / 2);
+    }
+}
+
+@media (max-width: 700px) {
+    .iframes-wrapper {
+        width: 100%;
+        left: 0;
+        padding: 16px;
+    }
+
+    .iframe {
+        width: 100%;
+    }
 }
