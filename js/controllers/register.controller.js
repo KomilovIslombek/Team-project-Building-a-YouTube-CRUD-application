@@ -4,7 +4,7 @@ import { protect } from '../middleware/auth.middleware.js';
 protect()
 
 
-const REGISTER_API = `https://youtube-backend-4-n5uz.onrender.com/register`
+const REGISTER_API = `https://n30-youtube-api.onrender.com/register`
 const registerFormEl = document.querySelector('#registerForm')
 const errorEl = document.querySelector('#errorMessage')
 errorEl.textContent = ''

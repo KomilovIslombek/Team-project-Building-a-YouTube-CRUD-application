@@ -4,7 +4,7 @@ import { getUserFromStorage, logOut } from "../helpers/hepler.js";
 
 protect()
 
-const getFiles_api = 'https://youtube-backend-4-n5uz.onrender.com/files';
+const getFiles_api = 'https://n30-youtube-api.onrender.com/files';
 const user = getUserFromStorage() || null
 const errorEl = document.querySelector('#errorMessage')
 

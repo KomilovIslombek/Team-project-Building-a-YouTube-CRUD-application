@@ -5,7 +5,7 @@ import { protect } from '../middleware/auth.middleware.js';
 protect()
 
 
-const LOGIN_API = `https://youtube-backend-4-n5uz.onrender.com/login`
+const LOGIN_API = `https://n30-youtube-api.onrender.com/login`
 const loginFormEl = document.querySelector('#loginForm')
 const errorEl = document.querySelector('#errorMessage')
 errorEl.textContent = ''

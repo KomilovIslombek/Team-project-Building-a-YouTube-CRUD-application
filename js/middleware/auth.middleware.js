@@ -18,7 +18,7 @@ export async function protect(res = {}) {
         }
 
         const { username, password } = user
-        const foundUser = await axios.post('https://youtube-backend-4-n5uz.onrender.com/login', { username, password })
+        const foundUser = await axios.post('https://n30-youtube-api.onrender.com/login', { username, password })
         if(!foundUser.data) return window.location.href = "/register.html";
 
         if(href === 'admin.html') return;

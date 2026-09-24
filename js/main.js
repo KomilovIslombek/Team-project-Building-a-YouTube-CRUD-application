@@ -1,8 +1,8 @@
 import { getUserFromStorage } from "./helpers/hepler.js"
 
 
-const users_api = 'https://youtube-backend-4-n5uz.onrender.com/users';
-const files_api = 'https://youtube-backend-4-n5uz.onrender.com/files';
+const users_api = 'https://n30-youtube-api.onrender.com/users';
+const files_api = 'https://n30-youtube-api.onrender.com/files';
 const usersList = document.querySelector("#users-list")
 const avatarWrapper = document.querySelector(".avatar-img-wrapper")
 const videosList = document.querySelector(".iframes-list")
