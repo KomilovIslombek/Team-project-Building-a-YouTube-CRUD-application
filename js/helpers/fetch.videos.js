@@ -1,6 +1,6 @@
 import { getUserFromStorage } from "./hepler.js";
 
-const myFiles_api = 'https://n30-youtube-api.onrender.com/files/my';
+const myFiles_api = 'https://youtube-backend-4-n5uz.onrender.com/files/my';
 let videosList = document.querySelector('.videos-list-wrapper')
 const user = getUserFromStorage() || null
 
@@ -61,7 +61,7 @@ async function removeVideo(fileId) {
     console.log('removeVideo', fileId);
     
     try {
-        await axios.delete('https://n30-youtube-api.onrender.com/files', {
+        await axios.delete('https://youtube-backend-4-n5uz.onrender.com/files', {
             headers: {
                 Authorization: `Bearer ${user.token}`
             },
@@ -104,7 +104,7 @@ editForm.addEventListener('submit', async (event) => {
     try {
         console.log(fieldId, 'fieldId', value);
         
-        await axios.put('https://n30-youtube-api.onrender.com/files', {
+        await axios.put('https://youtube-backend-4-n5uz.onrender.com/files', {
             fileId: fieldId,
             value
         }, {

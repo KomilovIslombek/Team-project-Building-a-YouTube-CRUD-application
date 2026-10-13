@@ -1,13 +1,45 @@
 import { getUserFromStorage } from "./helpers/hepler.js"
 
 
-const users_api = 'https://n30-youtube-api.onrender.com/users';
-const files_api = 'https://n30-youtube-api.onrender.com/files';
+const users_api = 'https://youtube-backend-4-n5uz.onrender.com/users';
+const files_api = 'https://youtube-backend-4-n5uz.onrender.com/files';
 const usersList = document.querySelector("#users-list")
 const avatarWrapper = document.querySelector(".avatar-img-wrapper")
 const videosList = document.querySelector(".iframes-list")
+const searchForm = document.querySelector('.search-box')
+const searchInput = document.querySelector('#inputSearch')
 const user = getUserFromStorage() || null
 const selectedUserStorageKey = 'youtube:selected-user-id'
+const searchParams = new URLSearchParams(window.location.search)
+let searchQuery = searchParams.get('search')?.trim() ?? ''
+let activeSelectedUser = null
+let filesCache = null
+
+searchInput.value = searchQuery
+
+function updateSearchQuery(value) {
+    searchQuery = value.trim()
+    const nextUrl = new URL(window.location.href)
+
+    if (searchQuery) {
+        nextUrl.searchParams.set('search', searchQuery)
+    } else {
+        nextUrl.searchParams.delete('search')
+    }
+
+    window.history.replaceState(null, '', nextUrl)
+}
+
+searchForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+    updateSearchQuery(searchInput.value)
+    fetchVideos()
+})
+
+searchInput.addEventListener('input', () => {
+    updateSearchQuery(searchInput.value)
+    fetchVideos()
+})
 
 if(user) {
     avatarWrapper.setAttribute('href', '/admin.html')
@@ -15,9 +47,15 @@ if(user) {
     avatarWrapper.querySelector('img').src = user.profileImg
 }
 
-async function fetchVideos(selectedUser = null) {
+async function fetchVideos(selectedUser = activeSelectedUser) {
     try {
-        const {data: {data: files}} = await axios.get(files_api)
+        activeSelectedUser = selectedUser
+        if (filesCache === null) {
+            const {data: {data: files}} = await axios.get(files_api)
+            filesCache = files
+        }
+
+        const files = filesCache
         if (!selectedUser) {
             renderVideos(files)
             return
@@ -43,7 +81,21 @@ async function fetchVideos(selectedUser = null) {
 function renderVideos(videos) {
     videosList.innerHTML = ''
 
-    for (const video of videos) {
+    const normalizedQuery = searchQuery.toLowerCase()
+    const filteredVideos = normalizedQuery
+        ? videos.filter((video) => {
+            const videoTitle = video.videoInput ?? ''
+            const videoUsername = video.user?.username ?? ''
+            return `${videoTitle} ${videoUsername}`.toLowerCase().includes(normalizedQuery)
+        })
+        : videos
+
+    if (!filteredVideos.length) {
+        videosList.innerHTML = '<li class="no-results">No videos found.</li>'
+        return
+    }
+
+    for (const video of filteredVideos) {
         const videoUser = video.user ?? {}
         const profileImg = videoUser.profileImg ?? 'https://cdn-icons-png.flaticon.com/512/146/146031.png'
         const videoDate = video.data ?? ''
@@ -96,6 +148,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 event.preventDefault()
                 localStorage.removeItem(selectedUserStorageKey)
                 setActiveUser('main')
+                activeSelectedUser = null
                 await fetchVideos()
                 return
             }
