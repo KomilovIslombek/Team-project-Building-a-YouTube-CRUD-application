@@ -1,40 +1,27 @@
-import db from "../db/db.js";
+import { createUser, findAllUsers } from "../services/user.service.js";
+import { buildAvatarName, saveAvatar } from "../utils/avatar.js";
+import { signToken } from "../utils/jwt.js";
 
 export const registerUser = async (req, res) => {
     let  { username, password } = req.body;
-    let file = req.files.file;
-    console.log('file', file)
+    let file = req.files?.file;
+    let imgName = file ? buildAvatarName(file) : null;
 
-    try {
-        let insertQuery = `INSERT INTO users (username, password, profile_img) VALUES ('${username}', '${password}', '${file.name}')`
+    let user = await createUser({username, password, profile_img: imgName})
+    
+    if(user) await saveAvatar(file, imgName);
 
-        let result = await db.query(insertQuery)
-        res.status(201).json({
-            status: 201,
-            message: 'User created properly',
-            data: result.rows[0] || 'data'
-        });
-    } catch (err) {
-        console.error('Error during inserting a new user', err.message);
-        return res.status(500).json({
-            status: 500,
-            message: 'Server Error / cannot add a new user'
-        });
-    }
+    const token = signToken(user);
+
+    return res.status(201).json({ 
+        status: 201, 
+        message: 'user created successfully', 
+        data: {user, token} 
+    })
 } 
 
 
 export const getUsers = async (req, res) => {
-    try {
-        const result = await db.query('SELECT * FROM users')
-
-        return res.status(200).json({
-            status: 200,
-            message: 'Users fetched successfully',
-            data: result.rows
-        })
-    } catch (err) {
-        console.error(err.message);
-        return res.status(500).send('Server Error');
-    }
+    let users = await findAllUsers()
+    return res.status(200).json({ status: 200, message: 'Users fetched successfully', data: users })
 }
