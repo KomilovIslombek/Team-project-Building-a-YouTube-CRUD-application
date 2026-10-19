@@ -10,6 +10,33 @@ export const findUserVideos = async (id) => {
     return result.rows
 }
 
+export const findOwnedVideo = async (id, userId) => {
+    const result = await db.query(
+        "SELECT id, title, user_id, url FROM videos WHERE id = $1 AND user_id = $2",
+        [id, userId]
+    )
+    return result.rows[0]
+}
+
+export const updateOwnedVideo = async ({ id, userId, title, url }) => {
+    const result = await db.query(
+        `UPDATE videos
+         SET title = COALESCE($3, title), url = COALESCE($4, url)
+         WHERE id = $1 AND user_id = $2
+         RETURNING id, title, user_id, url`,
+        [id, userId, title ?? null, url ?? null]
+    )
+    return result.rows[0]
+}
+
+export const deleteOwnedVideo = async (id, userId) => {
+    const result = await db.query(
+        "DELETE FROM videos WHERE id = $1 AND user_id = $2 RETURNING id, title, user_id, url",
+        [id, userId]
+    )
+    return result.rows[0]
+}
+
 export const insertVideo = async ({ title, user_id, url }) => {
 
     try {
