@@ -1,6 +1,7 @@
 import express from 'express'
 
 import userRoutes from './routes/user.routes.js'
+import videoRoutes from './routes/video.routes.js'
 
 import fileUpload from 'express-fileupload'
 import { errorHandler } from './middlewares/errorHandler.js'
@@ -14,6 +15,7 @@ app.use(fileUpload())
 // app.use("/uploads", express.static("uploads"))
 
 app.use('/api/v1/users', userRoutes)
+app.use('/api/v1/videos', videoRoutes)
 
 
 app.use(errorHandler); // must be last
