@@ -1,4 +1,4 @@
-import { createUser, findAllUsers } from "../services/user.service.js";
+import { authenticateUser, createUser, findAllUsers, findUser } from "../services/user.service.js";
 import { buildAvatarName, saveAvatar } from "../utils/avatar.js";
 import { signToken } from "../utils/jwt.js";
 
@@ -20,8 +20,33 @@ export const registerUser = async (req, res) => {
     })
 } 
 
+export const loginUser = async (req, res) => {
+    const user = await authenticateUser(req.body);
+    const token = signToken(user);
+
+    res.status(200).json({
+        status: 200,
+        message: "Logged in successfully",
+        data: { user, token },
+    });
+}
+
 
 export const getUsers = async (req, res) => {
     let users = await findAllUsers()
     return res.status(200).json({ status: 200, message: 'Users fetched successfully', data: users })
+}
+
+export const getUser = async (req, res) => {
+    let user = await findUser(req.params) 
+    
+    if(!user.id) {
+        return res.status(404).json({
+            status: 404,
+            message: `User not found with this id ${req.params.id}`,
+            data: []
+        })
+    } 
+
+    return res.status(200).json({ status: 200, message: 'User fetched successfully by id', data: user })
 }
