@@ -43,8 +43,10 @@ videoForm.addEventListener('submit', async (e) => {
     formData.append('videoInput', title)
     formData.append('file', video_file)
 
+    const postAPI = 'http://localhost:5000/api/v1/files';
+
     try {
-        const {data: {data}} = await axios.post(getFiles_api, formData, {
+        const {data: {data}} = await axios.post(postAPI, formData, {
             headers: {
                 Authorization: `Bearer ${user.token}`
             }

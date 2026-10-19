@@ -4,7 +4,8 @@ import { protect } from '../middleware/auth.middleware.js';
 protect()
 
 
-const REGISTER_API = `https://youtube-backend-4-n5uz.onrender.com/register`
+// const REGISTER_API = `https://youtube-backend-4-n5uz.onrender.com/register`
+const REGISTER_API = `http://localhost:5000/api/v1/register`
 const registerFormEl = document.querySelector('#registerForm')
 const errorEl = document.querySelector('#errorMessage')
 errorEl.textContent = ''
@@ -33,11 +34,11 @@ registerFormEl.addEventListener('submit', async (e) => {
         
         console.log(data);
         
-        if(!data.token) return console.error('token is not defined');
+        if(!data.data.token) return console.error('token is not defined');
 
         setUserToStorage(data, password)
         window.location.href = '/admin.html';
-        
+
     } catch (error) {
         if (axios.isAxiosError(error)) {
       

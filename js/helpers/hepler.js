@@ -17,7 +17,7 @@ export function getUserFromStorage() {
 export function setUserToStorage(data, password) {
     if(!data) throw new Error('func/setUserToStorage: Data is not defined');
 
-    window.localStorage.setItem('youtube:user', JSON.stringify({...data.data, token: data.token, password}))
+    window.localStorage.setItem('youtube:user', JSON.stringify({...data.data, token: data.data.token, password}))
 }
 
 export function logOut() {

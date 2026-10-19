@@ -2,6 +2,7 @@ import { getUserFromStorage } from "./helpers/hepler.js"
 
 
 const users_api = 'https://youtube-backend-4-n5uz.onrender.com/users';
+// const users_api = 'http://localhost:5000/api/v1/users';
 const files_api = 'https://youtube-backend-4-n5uz.onrender.com/files';
 const usersList = document.querySelector("#users-list")
 const avatarWrapper = document.querySelector(".avatar-img-wrapper")
@@ -134,7 +135,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             const userId = member.id ?? member.userId ?? member._id
             let userHTML = `<li class="channel user-member" data-id="${userId}" data-username="${member.username}">
                         <a href="#">
-                            <img src="${member.profileImg ?? 'https://cdn-icons-png.flaticon.com/512/146/146031.png'}" alt="channel-icon"
+                            <img src="${member.file ?? 'https://cdn-icons-png.flaticon.com/512/146/146031.png'}" alt="channel-icon"
                                 width="30px" height="30px">
                             <span>${member.username}</span>
                         </a>
